@@ -1,3 +1,6 @@
+(*http://progopedia.com/. (n.d.). Fibonacci numbers. Progopedia. 
+Retrieved October 3, 2022, from http://progopedia.com/example/fibonacci/ *)
+
 let rec fibonacci n =
   if n < 3 then
     1
