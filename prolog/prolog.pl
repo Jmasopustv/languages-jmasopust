@@ -1,6 +1,5 @@
 :- dynamic at/2, i_am_at/1, alive/1.   /* Needed by SWI-Prolog. */
 :- retractall(at(_, _)), retractall(i_am_at(_)), retractall(alive(_)).
-
 /* This defines my current location. */
 
 i_am_at(yard).
@@ -80,17 +79,22 @@ drop(_) :-
 /* These rules define the six direction letters as calls to go/1. */
 
 n :- go(n).
+:- discontiguous n/0.
 
 s :- go(s).
+:- discontiguous (s)/0.
 
 e :- go(e).
+:- discontiguous e/0.
 
 w :- go(w).
+:- discontiguous w/0.   
 
 u :- go(u).
+:- discontiguous u/0.   
 
-d :- go(d).
-
+d :- go(d).     
+:- discontiguous d/0.       
 
 /* This rule tells how to move in a given direction. */
 
@@ -142,7 +146,7 @@ kill :-
         i_am_at(river),
         write('You are on the bank of a river.'), nl,
         write('The ground below you sinks into the river.'), nl,
-        write('The current is too strong. You were swept away!), nl,
+        write('The current is too strong. You were swept away!'), nl,
         !, die.
 
 kill :-
