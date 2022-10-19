@@ -12,9 +12,18 @@ path(yard, n, house).
         path(house, n, room) :-
                 write('How do you expect to get in without a key?'), nl,
                 !, fail.
+path(stairwell, d, bear_den) :- at(axe, in_hand).
+        path(stairwell, d, bear_den) :-
+                write('Theres a bear here! You got eaten.'), nl,
+                !, die.
+
+        path(room, s, house).
         path(house, w, stairwell).
-                path(stairwell, w, bear_den).
+                path(stairwell, e, house).
+                path(stairwell, d, bear_den).
         path(house, e, empty_room).
+        path(empty_room, w, house).
+        path(bear_den, u, stairwell).
 path(yard, e, cabin).
         path(cabin, u, attic).
 path(yard, s, river).       
@@ -22,11 +31,12 @@ path(yard, w, forest).
 
 path(house, s, yard).
         path(room, s, house).
-        path(stairwell, w, house).
+        path(stairwell, e, house).
         path(empty_room, w, house).
 path(cabin, w, yard).
         path(river, n, yard).
 path(forest, e, yard).
+path(attic, d, cabin).
 
 
 /* These facts tell where the various objects in the game
@@ -224,10 +234,20 @@ describe(cabin) :-
 
 describe(house) :-
         write('This place is creepy. To the north is'), nl,
-        write('a locked room. To the West a dark and scary '), nl,
-        write('stairwell, and to your west is seemingly empty room.'), nl.
+        write('a locked room. To the west a dark and scary '), nl,
+        write('stairwell, and to your east is seemingly empty room.'), nl.
 
 describe(forest) :-
-        write('This place seems like it never ends!'), nl.
+        write('This dark forest seems like it never ends!'), nl.
 
+describe(attic) :-
+        write('Theres nothing up here! Are we even making progress?'), nl.
 
+describe(empty_room) :-
+        write('Theres nothing in here but im getting a scary feeling. We better leave.'), nl.
+
+describe(stairwell) :-
+        write('These stairs are exausting! What now?.'), nl.
+
+describe(bear_den) :-
+        write(''), nl.
